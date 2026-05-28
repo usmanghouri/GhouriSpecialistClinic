@@ -76,7 +76,7 @@ export default function ContactForm() {
                   <div>
                     <p className="text-sm text-gray-500 font-medium">Clinic Address</p>
                     <p className="text-lg font-semibold text-gray-900 leading-snug">
-                      Main College Road, <br/>Al Hamad Chowk, Silver Estate, Lahore
+                      Main College Road, <br/>Al Hamad Chowk, Silver Estate, PCSIR Staff Colony, Lahore
                     </p>
                   </div>
                 </div>
