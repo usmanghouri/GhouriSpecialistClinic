@@ -1,20 +1,64 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Phone, MessageCircle, MapPin, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, MessageCircle, MapPin, Send, CheckCircle2, X } from "lucide-react";
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    
+    // Trigger the custom toast notification
+    setShowToast(true);
+    
+    // Optional: Reset the form fields after submission
+    const target = e.target as HTMLFormElement;
+    target.reset();
+
+    // Automatically hide the toast after 6 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 9000);
   }
 
   return (
-    <section id="contact" className="py-24 bg-teal-50">
+    <section id="contact" className="py-24 bg-teal-50 relative">
+      
+      {/* --- CUSTOM TOAST NOTIFICATION CORNER --- */}
+      <div className="fixed bottom-5 right-5 z-50 max-w-md w-full px-4 sm:px-0">
+        <AnimatePresence>
+          {showToast && (
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.9 }}
+              className="bg-white border border-teal-100 rounded-2xl p-5 shadow-2xl flex items-start gap-4 ring-1 ring-teal-900/5"
+            >
+              <div className="p-2 bg-teal-100 text-teal-600 rounded-xl shrink-0">
+                <CheckCircle2 size={24} />
+              </div>
+              
+              <div className="flex-1">
+                <h4 className="font-semibold text-gray-900 text-base mb-1">Request Submitted!</h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Thank you for reaching out. For an **immediate response** or rapid booking, please contact us directly on our given numbers or tap the WhatsApp button below.
+                </p>
+              </div>
+
+              <button 
+                onClick={() => setShowToast(false)}
+                className="text-gray-400 hover:text-gray-600 p-1 rounded-lg transition-colors"
+              >
+                <X size={18} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      {/* ---------------------------------------- */}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.h2 
@@ -49,7 +93,7 @@ export default function ContactForm() {
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
               
               <div className="space-y-6">
-                <a href="tel:+923001234567" className="flex items-center gap-4 group">
+                <a href="tel:+923364008086" className="flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <Phone size={24} />
                   </div>
@@ -59,7 +103,7 @@ export default function ContactForm() {
                   </div>
                 </a>
 
-                <a href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <a href="https://wa.me/923364008086" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
                     <MessageCircle size={24} />
                   </div>
@@ -106,17 +150,6 @@ export default function ContactForm() {
             className="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-teal-900/5 border border-gray-100"
           >
             <h3 className="text-2xl font-semibold text-gray-900 mb-6">Send us a Message</h3>
-            
-            {sent && (
-              <motion.div 
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl border border-green-200 flex items-start gap-3"
-              >
-                <div className="mt-0.5"><Send size={18} /></div>
-                <p className="text-sm font-medium">Message sent successfully! We will get back to you shortly. For immediate response, please use WhatsApp.</p>
-              </motion.div>
-            )}
 
             <form onSubmit={submitForm} className="space-y-5">
               <div>
