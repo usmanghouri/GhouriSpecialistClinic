@@ -56,6 +56,7 @@ export default function Hero() {
             className="flex-1 w-full max-w-lg lg:max-w-none relative"
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                // src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1200&auto=format&fit=crop"
                src="https://images.unsplash.com/photo-1624727828489-a1e03b79bba8?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, MapPin, Mail, Send } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Send } from "lucide-react";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
